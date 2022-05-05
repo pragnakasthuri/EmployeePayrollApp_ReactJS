@@ -21,6 +21,14 @@ body {
     border: 0px solid green;
 }
 
+.submit-reset {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 0px solid green;
+}
+
 .logo {
     display: flex;
     flex-direction: row;

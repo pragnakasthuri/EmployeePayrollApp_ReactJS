@@ -16,8 +16,7 @@ html body {
 .header-content {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
     border: 0px solid green;
 }
 
@@ -96,6 +95,7 @@ html body {
     width: 26px;
     text-align: center;
     display: inline-block;
+    margin-left: 5px;
 }
 
 /* UC 3 */

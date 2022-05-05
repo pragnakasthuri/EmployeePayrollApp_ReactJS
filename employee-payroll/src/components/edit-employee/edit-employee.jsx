@@ -1,13 +1,17 @@
 import './payroll-form.scss';
 import logo from '../assets/images/logo.png';
-import { useState } from "react";
+import React, { useState } from "react";
 import profile_pic_1 from '../assets/profile-images/Ellipse -1.png';
 import profile_pic_2 from '../assets/profile-images/Ellipse -3.png';
 import profile_pic_3 from '../assets/profile-images/Ellipse -9.png';
 import profile_pic_4 from '../assets/profile-images/Ellipse -7.png';
-// import {useParams,Link,withRouter} from 'react-router-dom';
 
-const PayrollForm = (props) => {
+
+const EditEmployee = (props) => {
+
+    const days = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"];
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const years = ["2016","2017","2018","2019","2020","2021","2022"];
 
     const save = async (event) => {
         event.preventDefault();
@@ -18,34 +22,12 @@ const PayrollForm = (props) => {
         }
         formValue.startDate = formValue.day + ' ' + formValue.month + ' ' + formValue.year;
         // this.state.formValue = formValue;
-        props.addEmployeeHandler(formValue);
+        props.updateEmployeeHandler(formValue);
+        // this.setState({ name: "", email: "" });
         props.history.push("/");
     }
 
-    let initalValue = {
-        name : '',
-        allDepartment: [
-            'HR', 'Sales', 'Finance', 'Engineer', 'Others'
-        ],
-        departmentValue: [],
-        gender: '',
-        salary: '',
-        startDate: '',
-        notes: '',
-        id: '',
-        profileUrl: '',
-        isUpdate: false,
-        error: {
-            department: '',
-            name: '',
-            gender: '',
-            salary: '',
-            profileUrl: '',
-            startDate: ''      
-        }
-    }
-
-    const [formValue, setForm] = useState(initalValue);
+    const [formValue, setForm] = useState(props.location.state.employee);
     const changeValue = (event) => {
         setForm({...formValue, [event.target.name]: event.target.value})
     }
@@ -99,13 +81,9 @@ const PayrollForm = (props) => {
         await setForm( {...formValue, error:error});
         return isError;
     }
+
     const cancel = () => {
         props.history.push("/");
-    }
-
-    const reset = () => {
-        setForm({ ...formValue, id: formValue.id, isUpdate: formValue.isUpdate});
-        console.log(formValue);
     }
 
     return (
@@ -159,9 +137,9 @@ const PayrollForm = (props) => {
                <div className="row">
                    <label className="label text" htmlFor="gender">Gender</label>
                    <div>
-                       <input type="radio" id="male" onChange={changeValue} name="gender" value="male" />
+                       <input type="radio" id="male" onChange={changeValue} name="gender" value="male" checked={formValue.gender == 'male'}/>
                        <label className="text" htmlFor="male">Male</label>
-                       <input type="radio" id="female" onChange={changeValue} name="gender" value="female" />
+                       <input type="radio" id="female" onChange={changeValue} name="gender" value="female" checked={formValue.gender == 'female'}/>
                        <label className="text" htmlFor="female">Female</label>
                    </div>
                </div>
@@ -173,7 +151,7 @@ const PayrollForm = (props) => {
                        {formValue.allDepartment.map(item => {
                            return (<span key={item}>
                             <input className="checkbox" type="checkbox" onChange={() => onCheckChange(item)} name={item}
-                                defaultChecked={() => getChecked(item)} value={item}/>
+                                defaultChecked={formValue.departmentValue.includes(item)} value={item}/>
                             <label className="text" htmlFor={item}>{item}</label>
                            </span>)
                        })}
@@ -193,59 +171,27 @@ const PayrollForm = (props) => {
                    <label className="label text" htmlFor="startDate">Start Date</label>
                    <div>
                        <select id="day" name="day" onChange={changeValue}>
-                           <option value="1">1</option>
-                           <option value="2">2</option>
-                           <option value="3">3</option>
-                           <option value="4">4</option>
-                           <option value="5">5</option>
-                           <option value="6">6</option>
-                           <option value="7">7</option>
-                           <option value="8">8</option>
-                           <option value="9">9</option>
-                           <option value="10">10</option>
-                           <option value="11">11</option>
-                           <option value="12">12</option>
-                           <option value="13">13</option>
-                           <option value="14">14</option>
-                           <option value="15">15</option>
-                           <option value="16">16</option>
-                           <option value="17">17</option>
-                           <option value="18">18</option>
-                           <option value="19">19</option>
-                           <option value="20">20</option>
-                           <option value="21">21</option>
-                           <option value="22">22</option>
-                           <option value="23">23</option>
-                           <option value="24">24</option>
-                           <option value="25">25</option>
-                           <option value="26">26</option>
-                           <option value="27">27</option>
-                           <option value="28">28</option>
-                           <option value="29">29</option>
-                           <option value="30">30</option>
-                           <option value="31">31</option>
+                        { 
+                            days.map(i => {
+                                return (<option value={i} selected={formValue.day === i}>{i}</option>);
+                            })
+                        }
                        </select>
+
                        <select id="month" name="month" onChange={changeValue}>
-                           <option value="0">January</option>
-                           <option value="1">February</option>
-                           <option value="2">March</option>
-                           <option value="3">April</option>
-                           <option value="4">May</option>
-                           <option value="5">June</option>
-                           <option value="6">July</option>
-                           <option value="7">August</option>
-                           <option value="8">September</option>
-                           <option value="9">October</option>
-                           <option value="10">November</option>
-                           <option value="11">December</option>
+                           {
+                                months.map(i => {
+                                    return (<option value={i} selected={formValue.month === i}>{i}</option>);
+                                })
+                            }
                        </select>
+
                        <select id="year" name="year" onChange={changeValue}>
-                           <option value="2021">2021</option>
-                           <option value="2020">2020</option>
-                           <option value="2019">2019</option>
-                           <option value="2018">2018</option>
-                           <option value="2017">2017</option>
-                           <option value="2016">2016</option>
+                           {
+                                years.map(i => {
+                                    return (<option value={i} selected={formValue.year === i}>{i}</option>);
+                                })
+                            }
                        </select>
                    </div>
                </div>
@@ -256,10 +202,9 @@ const PayrollForm = (props) => {
                </div>
 
                <div className="buttonParent">
-               <button type="cancel" className="resetButton button" onClick={cancel}>Cancel</button>
                    <div className="submit-reset">
-                       <button type="submit" className="button submitButton" id="submitButton">{formValue.isUpdate ? 'Update' : 'Submit'}</button>
-                       <button type="reset" className="resetButton button" onClick={reset}>Reset</button>
+                        <button type="cancel" className="resetButton button" onClick={cancel}>Cancel</button>
+                        <button type="submit" className="button submitButton" id="submitButton">{'Update'}</button>
                    </div>
                </div>
            </form>
@@ -268,4 +213,4 @@ const PayrollForm = (props) => {
     )
 }
 
-export default PayrollForm;
+export default EditEmployee;

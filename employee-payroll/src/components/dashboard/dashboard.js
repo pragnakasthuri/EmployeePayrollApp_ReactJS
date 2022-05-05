@@ -8,7 +8,36 @@ import profile_pic_2 from '../assets/profile-images/Ellipse -4.png';
 import profile_pic_3 from '../assets/profile-images/Ellipse -9.png';
 import { Link } from "react-router-dom";
 
-function Dashboard() {
+const Dashboard = (props) => {
+
+    console.log(props);
+
+    const deleteEmployeeHandler = (id) => {
+        props.getEmployeeId(id);
+    };
+
+    const renderEmployeeList = props.employees.map((employee) => {
+        const {id, name, startDate, gender, departmentValue, salary, profileUrl} = employee;
+        return (
+          <tr>
+            <td>{id}</td>
+            <td><img className="profile" src={profile_pic_3} alt="profile_img-1"/></td>
+            <td>{name}</td>
+            <td>{gender}</td>
+            <td>
+                <div className="dept-label">{departmentValue}</div>
+            </td>
+            <td>{salary}</td>
+            <td>{startDate}</td>
+            <td>
+            <Link to={{ pathname: `/edit`, state: { employee: employee } }}>
+                <img src={editEmp} alt="edit"/>
+            </Link>
+                <img src={deleteEmp} alt="delete" onClick={() => deleteEmployeeHandler(id)}/>
+            </td>
+        </tr>
+        );
+    });
 
     return (
         <>
@@ -26,75 +55,32 @@ function Dashboard() {
                 <div className="header-content employee-header">
                     <div className="emp-detail-text">
                         Employee Details
-                        <div className="emp-count">10</div>
+                        <div className="emp-count">{props.employees.length}</div>
                     </div>
                     <Link to="/payroll" className="add-button">
                         <img className="add-button" src="../assets/plus_symbol.svg" alt=""/>Add Employee
                     </Link>
-
                 </div>
-
                 <div className="table-main">
                     <table id="table-display" className="table">
-                        <tr>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Gender</th>
-                            <th>Department</th>
-                            <th>Salary</th>
-                            <th>Start Date</th>
-                            <th>Actions</th>
-                        </tr>
-                        <tr>
-                            <td><img className="profile" src={profile_pic_1} alt="profile_img-1"/></td>
-                            <td>Pragna</td>
-                            <td>Female</td>
-                            <td>
-                                <div className="dept-label">Sales</div>
-                                <div className="dept-label">HR</div>
-                            </td>
-                            <td>350000</td>
-                            <td>01 Mar 2021</td>
-                            <td>
-                                <img src={editEmp} alt="delete" id="1" onClick="remove(this)"/>
-                                <img src={deleteEmp} alt="edit" id="1" onClick="update(this)"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img className="profile" src={profile_pic_2} alt="profile_img-2"/></td>
-                            <td>Aadhya</td>
-                            <td>Female</td>
-                            <td>
-                                <div className="dept-label">Sales</div>
-                                <div className="dept-label">Finance</div>
-                            </td>
-                            <td>4500000</td>
-                            <td>01 Jan 2022</td>
-                            <td>
-                                <img src={editEmp} alt="delete" id="1" onClick="remove(this)"/>
-                                <img src={deleteEmp} alt="edit" id="1" onClick="update(this)"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img className="profile" src={profile_pic_3} alt="profile_img-1"/></td>
-                            <td>Naresh</td>
-                            <td>Male</td>
-                            <td>
-                                <div className="dept-label">HR</div>
-                                <div className="dept-label">Sales</div>
-                            </td>
-                            <td>3000000</td>
-                            <td>01 Apr 2022</td>
-                            <td>
-                                <img src={editEmp} alt="delete" id="1" onClick="remove(this)"/>
-                                <img src={deleteEmp} alt="edit" id="1" onClick="update(this)"/>
-                            </td>
-                        </tr>
+                            <tr>
+                                <th>Id</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Department</th>
+                                <th>Salary</th>
+                                <th>Start Date</th>
+                                <th>Actions</th>
+                            </tr>
+                            {renderEmployeeList}
                     </table>
                 </div>
             </div>
         </>
     )
 }
+
 export default Dashboard;
+
 

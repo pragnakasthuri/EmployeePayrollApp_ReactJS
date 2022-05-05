@@ -1,0 +1,127 @@
+{
+  "employee": [
+    {
+      "name": "Naresh",
+      "profileArray": [
+        {
+          "url": "../assets/profile-images/Ellipse -1.png"
+        },
+        {
+          "url": "../assets/profile-images/Ellipse -3.png"
+        },
+        {
+          "url": "../assets/profile-images/Ellipse -9.png"
+        },
+        {
+          "url": "../assets/profile-images/Ellipse -7.png"
+        }
+      ],
+      "allDepartment": [
+        "HR",
+        "Sales",
+        "Finance",
+        "Engineer",
+        "Others"
+      ],
+      "departmentValue": [
+        "Engineer",
+        "Finance",
+        "Sales"
+      ],
+      "gender": "male",
+      "salary": "5639",
+      "day": "7",
+      "month": "Apr",
+      "year": "2018",
+      "startDate": "7 Apr 2018",
+      "notes": "Hi",
+      "id": 2,
+      "profileUrl": "..\\assets\\profile-images\\Ellipse -3.png",
+      "isUpdate": false,
+      "error": {
+        "department": "",
+        "name": "",
+        "gender": "",
+        "salary": "",
+        "profileUrl": "",
+        "startDate": ""
+      }
+    },
+    {
+      "name": "Aadhya",
+      "profileArray": [
+        {
+          "url": "../assets/profile-images/Ellipse -1.png"
+        },
+        {
+          "url": "../assets/profile-images/Ellipse -3.png"
+        },
+        {
+          "url": "../assets/profile-images/Ellipse -9.png"
+        },
+        {
+          "url": "../assets/profile-images/Ellipse -7.png"
+        }
+      ],
+      "allDepartment": [
+        "HR",
+        "Sales",
+        "Finance",
+        "Engineer",
+        "Others"
+      ],
+      "departmentValue": [
+        "Finance"
+      ],
+      "gender": "female",
+      "salary": "4545",
+      "day": "9",
+      "month": "Mar",
+      "year": "2018",
+      "startDate": "9 Mar 2018",
+      "notes": "Hi",
+      "id": 3,
+      "profileUrl": "..\\assets\\profile-images\\Ellipse -1.png",
+      "isUpdate": false,
+      "error": {
+        "department": "",
+        "name": "",
+        "gender": "",
+        "salary": "",
+        "profileUrl": "",
+        "startDate": ""
+      }
+    },
+    {
+      "name": "Vani",
+      "allDepartment": [
+        "HR",
+        "Sales",
+        "Finance",
+        "Engineer",
+        "Others"
+      ],
+      "departmentValue": [
+        "Finance"
+      ],
+      "gender": "female",
+      "salary": "4500",
+      "startDate": "5 May 2018",
+      "notes": "adding",
+      "id": 4,
+      "profileUrl": "..\\assets\\profile-images\\Ellipse -1.png",
+      "isUpdate": false,
+      "error": {
+        "department": "",
+        "name": "",
+        "gender": "",
+        "salary": "",
+        "profileUrl": "",
+        "startDate": ""
+      },
+      "day": "5",
+      "month": "May",
+      "year": "2018"
+    }
+  ]
+}
